@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Dwi Randy H
@@ -14,7 +15,12 @@ use Illuminate\Support\Facades\DB;
 
 class WallpaperRepository
 {
-    const PAGE_SIZE = 5;
+    const PAGE_SIZE = 20;
+
+    public function getAll()
+    {
+        return Wallpaper::get();
+    }
 
     public function getWallpaperItemWithPagination()
     {
@@ -22,22 +28,32 @@ class WallpaperRepository
             ->paginate(self::PAGE_SIZE);
     }
 
-    public function getPopularWallpaper(){
+    public function getPopularWallpaper()
+    {
         return Wallpaper::orderByDesc('views')
             ->paginate(self::PAGE_SIZE);
     }
 
-    public function addView($id){
+    public function addView($id)
+    {
         DB::table('wallpapers')->where('id', '=', $id)->increment('views');
         return $this->getDetailById($id);
     }
 
-    public function addDownload($id){
+    public function addDownload($id)
+    {
         DB::table('wallpapers')->where('id', '=', $id)->increment('downloads');
         return $this->getDetailById($id);
     }
 
-    public function getDetailById($id){
+    public function getDetailById($id)
+    {
         return Wallpaper::where('id', '=', $id)->firstOrFail();
+    }
+
+    public function updateMetaData($id, $metaData)
+    {
+        return Wallpaper::where('id', '=', $id)
+            ->update($metaData);
     }
 }

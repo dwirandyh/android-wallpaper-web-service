@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Dwi Randy H
@@ -16,12 +17,33 @@ class CategoryRepository
 {
     const PAGE_SIZE = 10;
 
-    public function getCategories(){
+    public function getAll()
+    {
+        return Category::all();
+    }
+
+    public function getCategories()
+    {
         return Category::paginate(self::PAGE_SIZE);
     }
 
-    public function getWallpaperById($id){
+    public function getCategoryById($id)
+    {
+        return Category::findOrFail($id);
+    }
+
+    public function getWallpaperById($id)
+    {
         return Wallpaper::where('category_id', '=', $id)
             ->paginate(self::PAGE_SIZE);
+    }
+
+    public function updateWallpaperCount($categoryId)
+    {
+        $count = Wallpaper::where('category_id', '=', $categoryId)
+            ->count();
+
+        return $category = Category::where('id', '=', $categoryId)
+            ->update(['wallpaper_count' => $count]);
     }
 }

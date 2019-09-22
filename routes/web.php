@@ -22,4 +22,8 @@ $router->post('/v1/wallpaper/{id}/view', 'WallpaperController@addWallpaperView')
 $router->post('/v1/wallpaper/{id}/download', 'WallpaperController@addWallpaperDownload');
 
 $router->get('/v1/category', 'CategoryController@categories');
+$router->get('/v1/category/{id}', 'CategoryController@getCategoryById');
 $router->get('/v1/category/{id}/wallpaper', 'CategoryController@wallpaperById');
+
+
+$router->get('/v1/update', 'UpdateController@doUpdate');

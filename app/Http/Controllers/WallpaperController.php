@@ -6,31 +6,35 @@ use App\Repositories\WallpaperRepository;
 
 class WallpaperController extends Controller
 {
-    private $wallpaperItemRepository;
+    private $wallpaperRepository;
 
     /**
      * Create a new controller instance.
      *
      * @param WallpaperRepository $wallpaperItemRepository
      */
-    public function __construct(WallpaperRepository $wallpaperItemRepository)
+    public function __construct(WallpaperRepository $wallpaperRepository)
     {
-        $this->wallpaperItemRepository = $wallpaperItemRepository;
+        $this->wallpaperRepository = $wallpaperRepository;
     }
 
-    public function wallpaperItems(){
-        return $this->wallpaperItemRepository->getWallpaperItemWithPagination();
+    public function wallpaperItems()
+    {
+        return $this->wallpaperRepository->getWallpaperItemWithPagination();
     }
 
-    public function popularWallpaper(){
-        return $this->wallpaperItemRepository->getPopularWallpaper();
+    public function popularWallpaper()
+    {
+        return $this->wallpaperRepository->getPopularWallpaper();
     }
 
-    public function addWallpaperView($id){
-        return $this->wallpaperItemRepository->addDownload($id);
+    public function addWallpaperView($id)
+    {
+        return $this->wallpaperRepository->addDownload($id);
     }
 
-    public function addWallpaperDownload($id){
-        return $this->wallpaperItemRepository->addView($id);
+    public function addWallpaperDownload($id)
+    {
+        return $this->wallpaperRepository->addView($id);
     }
 }

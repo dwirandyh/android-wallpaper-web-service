@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Dwi Randy H
@@ -20,11 +21,18 @@ class CategoryController extends Controller
         $this->categoryRepository = $categoryRepository;
     }
 
-    public function categories(){
+    public function categories()
+    {
         return $this->categoryRepository->getCategories();
     }
 
-    public function wallpaperById($id){
+    public function getCategoryById($id)
+    {
+        return $this->categoryRepository->getCategoryById($id);
+    }
+
+    public function wallpaperById($id)
+    {
         return $this->categoryRepository->getWallpaperById($id);
     }
 }
